@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Artigos.Models.tbl_artigos>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1 style="color:dodgerblue">Artigos de Desenvolvedores</h1>
+
+</div>
+
+
+@foreach (var item in Model)
+{
+    <div class="jumbotron">
+        <div class="card" style="width: auto">
+            <div class="card-body">
+                <h3 class="card-title">@Html.DisplayFor(modelItem => item.titulo)</h3>
+                <p class="card-text">@Html.DisplayFor(modelItem => item.texto)</p>
+                <p class="card-title">Data: @Html.DisplayFor(modelItem => item.cadastro) - Desenvolvedor:  @Html.DisplayFor(modelItem => item.tbl_desenvolvedor.nome)</p>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,58 @@
+﻿@model Artigos.Models.tbl_artigos
+
+@{
+    ViewBag.Title = "Detalhes do artigo";
+}
+
+<h2>Detalhes do artigo</h2>
+
+<div>
+    <h4>Artigos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.texto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.texto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cadastro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cadastro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ativo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ativo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_desenvolvedor.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_desenvolvedor.nome)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Retornar ao Index", "Index")
+</p>

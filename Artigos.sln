@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artigos", "Artigos.csproj", "{400BCC4E-60C8-4987-86B4-0A7828ABB472}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{400BCC4E-60C8-4987-86B4-0A7828ABB472}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{400BCC4E-60C8-4987-86B4-0A7828ABB472}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{400BCC4E-60C8-4987-86B4-0A7828ABB472}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{400BCC4E-60C8-4987-86B4-0A7828ABB472}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BD5A3FD7-C361-4B7B-A287-E31CBF722959}
+	EndGlobalSection
+EndGlobal

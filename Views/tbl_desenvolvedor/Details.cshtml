@@ -1,0 +1,42 @@
+﻿@model Artigos.Models.tbl_desenvolvedor
+
+@{
+    ViewBag.Title = "Detalhes sobre o desenvolvedor";
+}
+
+<h2>Detalhes</h2>
+
+<div>
+    <h4>Desenvolvedor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.data_nasc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.data_nasc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nivel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nivel)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Retornar ao Index", "Index")
+</p>

@@ -1,0 +1,64 @@
+﻿@model Artigos.Models.tbl_artigos
+
+@{
+    ViewBag.Title = "Excluir um artigo";
+}
+
+<h2>Excluir um artigo</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Artigos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.texto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.texto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cadastro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cadastro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ativo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ativo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_desenvolvedor.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_desenvolvedor.nome)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Excluir" class="btn btn-default" /> |
+            @Html.ActionLink("Retornar ao Index", "Index")
+        </div>
+    }
+</div>

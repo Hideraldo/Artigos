@@ -1,0 +1,181 @@
+USE [master]
+GO
+
+/****** Object:  Database [bd_artigos]    Script Date: 15/10/2021 15:58:55 ******/
+CREATE DATABASE [bd_artigos]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'bd_artigos', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL12.SQLEXPRESS\MSSQL\DATA\bd_artigos.mdf' , SIZE = 5120KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+ LOG ON 
+( NAME = N'bd_artigos_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL12.SQLEXPRESS\MSSQL\DATA\bd_artigos_log.ldf' , SIZE = 1024KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+GO
+
+ALTER DATABASE [bd_artigos] SET COMPATIBILITY_LEVEL = 120
+GO
+
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [bd_artigos].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+
+ALTER DATABASE [bd_artigos] SET ANSI_NULL_DEFAULT OFF 
+GO
+
+ALTER DATABASE [bd_artigos] SET ANSI_NULLS OFF 
+GO
+
+ALTER DATABASE [bd_artigos] SET ANSI_PADDING OFF 
+GO
+
+ALTER DATABASE [bd_artigos] SET ANSI_WARNINGS OFF 
+GO
+
+ALTER DATABASE [bd_artigos] SET ARITHABORT OFF 
+GO
+
+ALTER DATABASE [bd_artigos] SET AUTO_CLOSE OFF 
+GO
+
+ALTER DATABASE [bd_artigos] SET AUTO_SHRINK OFF 
+GO
+
+ALTER DATABASE [bd_artigos] SET AUTO_UPDATE_STATISTICS ON 
+GO
+
+ALTER DATABASE [bd_artigos] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+
+ALTER DATABASE [bd_artigos] SET CURSOR_DEFAULT  GLOBAL 
+GO
+
+ALTER DATABASE [bd_artigos] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+
+ALTER DATABASE [bd_artigos] SET NUMERIC_ROUNDABORT OFF 
+GO
+
+ALTER DATABASE [bd_artigos] SET QUOTED_IDENTIFIER OFF 
+GO
+
+ALTER DATABASE [bd_artigos] SET RECURSIVE_TRIGGERS OFF 
+GO
+
+ALTER DATABASE [bd_artigos] SET  DISABLE_BROKER 
+GO
+
+ALTER DATABASE [bd_artigos] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+
+ALTER DATABASE [bd_artigos] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+
+ALTER DATABASE [bd_artigos] SET TRUSTWORTHY OFF 
+GO
+
+ALTER DATABASE [bd_artigos] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+
+ALTER DATABASE [bd_artigos] SET PARAMETERIZATION SIMPLE 
+GO
+
+ALTER DATABASE [bd_artigos] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+
+ALTER DATABASE [bd_artigos] SET HONOR_BROKER_PRIORITY OFF 
+GO
+
+ALTER DATABASE [bd_artigos] SET RECOVERY SIMPLE 
+GO
+
+ALTER DATABASE [bd_artigos] SET  MULTI_USER 
+GO
+
+ALTER DATABASE [bd_artigos] SET PAGE_VERIFY CHECKSUM  
+GO
+
+ALTER DATABASE [bd_artigos] SET DB_CHAINING OFF 
+GO
+
+ALTER DATABASE [bd_artigos] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+
+ALTER DATABASE [bd_artigos] SET TARGET_RECOVERY_TIME = 0 SECONDS 
+GO
+
+ALTER DATABASE [bd_artigos] SET DELAYED_DURABILITY = DISABLED 
+GO
+
+ALTER DATABASE [bd_artigos] SET  READ_WRITE 
+GO
+
+
+
+USE [bd_artigos]
+GO
+
+/****** Object:  Table [dbo].[tbl_artigos]    Script Date: 15/10/2021 15:59:09 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[tbl_artigos](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[titulo] [varchar](255) NOT NULL,
+	[texto] [text] NOT NULL,
+	[cadastro] [datetime] NOT NULL,
+	[ativo] [char](1) NOT NULL CONSTRAINT [DF_tbl_artigos_ativo]  DEFAULT ('s'),
+	[desenvolvedor_id] [int] NOT NULL,
+ CONSTRAINT [PK_tbl_artigos] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[tbl_artigos]  WITH CHECK ADD  CONSTRAINT [FK_tbl_artigos_tbl_desenvolvedor] FOREIGN KEY([desenvolvedor_id])
+REFERENCES [dbo].[tbl_desenvolvedor] ([Id])
+GO
+
+ALTER TABLE [dbo].[tbl_artigos] CHECK CONSTRAINT [FK_tbl_artigos_tbl_desenvolvedor]
+GO
+
+USE [bd_artigos]
+GO
+
+/****** Object:  Table [dbo].[tbl_desenvolvedor]    Script Date: 15/10/2021 15:59:42 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[tbl_desenvolvedor](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[nome] [varchar](255) NOT NULL,
+	[data_nasc] [datetime] NULL,
+	[nivel] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_tbl_desenvolvedor] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+

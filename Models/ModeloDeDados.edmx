@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="bd_artigosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tbl_artigos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="titulo" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="texto" Type="text" Nullable="false" />
+          <Property Name="cadastro" Type="datetime" Nullable="false" />
+          <Property Name="ativo" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="desenvolvedor_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_desenvolvedor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="data_nasc" Type="datetime" />
+          <Property Name="nivel" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tbl_artigos_tbl_desenvolvedor">
+          <End Role="tbl_desenvolvedor" Type="Self.tbl_desenvolvedor" Multiplicity="1" />
+          <End Role="tbl_artigos" Type="Self.tbl_artigos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_desenvolvedor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_artigos">
+              <PropertyRef Name="desenvolvedor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bd_artigosModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_artigos" EntityType="Self.tbl_artigos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_desenvolvedor" EntityType="Self.tbl_desenvolvedor" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_artigos_tbl_desenvolvedor" Association="Self.FK_tbl_artigos_tbl_desenvolvedor">
+            <End Role="tbl_desenvolvedor" EntitySet="tbl_desenvolvedor" />
+            <End Role="tbl_artigos" EntitySet="tbl_artigos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bd_artigosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tbl_artigos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="titulo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="texto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cadastro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ativo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="desenvolvedor_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_desenvolvedor" Relationship="Self.FK_tbl_artigos_tbl_desenvolvedor" FromRole="tbl_artigos" ToRole="tbl_desenvolvedor" />
+        </EntityType>
+        <EntityType Name="tbl_desenvolvedor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="data_nasc" Type="DateTime" Precision="3" />
+          <Property Name="nivel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbl_artigos" Relationship="Self.FK_tbl_artigos_tbl_desenvolvedor" FromRole="tbl_desenvolvedor" ToRole="tbl_artigos" />
+        </EntityType>
+        <Association Name="FK_tbl_artigos_tbl_desenvolvedor">
+          <End Role="tbl_desenvolvedor" Type="Self.tbl_desenvolvedor" Multiplicity="1" />
+          <End Role="tbl_artigos" Type="Self.tbl_artigos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_desenvolvedor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_artigos">
+              <PropertyRef Name="desenvolvedor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bd_artigosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="tbl_artigos" EntityType="Self.tbl_artigos" />
+          <EntitySet Name="tbl_desenvolvedor" EntityType="Self.tbl_desenvolvedor" />
+          <AssociationSet Name="FK_tbl_artigos_tbl_desenvolvedor" Association="Self.FK_tbl_artigos_tbl_desenvolvedor">
+            <End Role="tbl_desenvolvedor" EntitySet="tbl_desenvolvedor" />
+            <End Role="tbl_artigos" EntitySet="tbl_artigos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bd_artigosModelStoreContainer" CdmEntityContainer="bd_artigosEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="bd_artigosModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_artigos">
+            <EntityTypeMapping TypeName="bd_artigosModel.tbl_artigos">
+              <MappingFragment StoreEntitySet="tbl_artigos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+                <ScalarProperty Name="texto" ColumnName="texto" />
+                <ScalarProperty Name="cadastro" ColumnName="cadastro" />
+                <ScalarProperty Name="ativo" ColumnName="ativo" />
+                <ScalarProperty Name="desenvolvedor_id" ColumnName="desenvolvedor_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_desenvolvedor">
+            <EntityTypeMapping TypeName="bd_artigosModel.tbl_desenvolvedor">
+              <MappingFragment StoreEntitySet="tbl_desenvolvedor">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="data_nasc" ColumnName="data_nasc" />
+                <ScalarProperty Name="nivel" ColumnName="nivel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
